@@ -11,14 +11,14 @@ SASS (SCSS) Our project will be organized using Sass files.
 
 Media queries
 
-@media (max-width: 940px) {}
+/* Portrait tablet and small desktops */
+@media (max-width: 940px) {
+}
 
---------------------------------------------------------
 /* Landscape phone to portrait tablet */
+@media (max-width: 768px) {
+}
 
-@media (max-width: 768px) {}
-
---------------------------------------------------------
 /* Landscape phones and down */
-
-@media (max-width: 480px) {}
+@media (max-width: 480px) {
+}
