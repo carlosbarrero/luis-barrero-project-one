@@ -1,5 +1,11 @@
 # luis-barrero-project-one
 
+github pages
+
+Home page - https://carlosbarrero.github.io/luis-barrero-project-one/
+Blog Page - https://carlosbarrero.github.io/luis-barrero-project-one/pages/blog.html
+Contact Page - https://carlosbarrero.github.io/luis-barrero-project-one/pages/contact.html
+
 First Juno Bootcamp Project
 
 Some Styles for the 3-page project
