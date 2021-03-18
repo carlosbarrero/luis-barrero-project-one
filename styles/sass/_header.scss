@@ -52,6 +52,20 @@
         font-size: 14px;
         margin-right: 16px;
       }
+      
+      a {
+      color: $black;
+      text-decoration: none;
+      }
+
+      &.is-active {
+      color: $primary-green;
+
+      a {
+      color: $primary-green;
+      }
+      }
+      
 
       &.is-active {
         color: $primary-green;
