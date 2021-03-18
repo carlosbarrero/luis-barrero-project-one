@@ -33,6 +33,16 @@ img, video {
   max-width: 100%;
 }
 
+a {
+    text-decoration: none !important;
+}
+
+a:hover {
+    color:white;
+    text-decoration:none;
+    cursor:pointer;
+}
+
 iframe {
   border: 0;
 }
