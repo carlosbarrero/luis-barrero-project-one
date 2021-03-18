@@ -10,7 +10,7 @@ Contact Page - https://carlosbarrero.github.io/luis-barrero-project-one/pages/co
 
 First Juno Bootcamp Project
 
-Some Styles for the 3-page project
+Styles for the 3-page project
 
 Naming Convention: BEM (Block-Element-Modifier) BEM will be used for HTML, CSS, and SCSS:
 
