@@ -17,7 +17,7 @@
           Delicious
         </span>
         <!--Main  -->
-        <ul class="header__list">
+        <ul id="menu-list" class="header__list">
           <li class="header__list__item is-active">
             Home
           </li>
@@ -50,7 +50,7 @@
           </li>
         </ul>
         <!--Main burger menu  -->
-        <button class="burger-button">
+        <button id='menu-button' class="burger-button">
           <i class="fas fa-bars"></i>
         </button>
       </header>
@@ -195,24 +195,24 @@
       <img src="./assets/images/jpg/home-10.jpeg" />
     </section>
     <!--Hungry clients quote   -->
-    <section class="restaurant-quotes is-flex is-flex--column">
+    <section id="quotes-section" class="restaurant-quotes is-flex is-flex--column">
       <h2 class="restaurant-quotes__title">
         Hungry clients
       </h2>
       <p class="restaurant-quotes__description">
         <i class="fas fa-quote-left icon icon__left"></i>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Alias deleniti debitis autem repellendus eum voluptates saepe
-        neque non facere vel consequatur nulla optio, blanditiis perferendis.
+        <span id='quote-text'>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta sunt quam sit, exercitationem dolor corrupti asperiores deserunt eligendi ad nobis expedita. Velit error molestiae soluta necessitatibus id ducimus deserunt quod!
+        </span>
         <i class="fas fa-quote-right icon icon__right"></i>
       </p>
       <!--HC chevrons   -->
       <div class="restaurant-quotes__pagination">
-        <button class="restaurant-quotes__pagination__button is-prev">
+        <button id='prev-quote-btn' class="restaurant-quotes__pagination__button is-prev">
           <i class="fas fa-chevron-left"></i>
         </button>
         <!--HC chevrons   -->
-        <button class="restaurant-quotes__pagination__button is-next">
+        <button id='next-quote-btn' class="restaurant-quotes__pagination__button is-next">
           <i class="fas fa-chevron-right"></i>
         </button>
       </div>
@@ -301,14 +301,16 @@
               Get all of our newest recipes inmediately at your inbox
             </p>
             <!--Footer Section third form   -->
-            <form class="is-flex footer__content__list__form__form-wrapper">
+            <form id="footer-form-element" class="is-flex footer__content__list__form__form-wrapper">
               <label for="email">
                 <input
                   type="email"
                   name="email"
-                  id="email"
+                  id="footer-email-input"
                   placeholder="Enter your email"
                 />
+                <span class="invalid-msg">          
+                </span>
               </label>
               <button><i class="fas fa-long-arrow-alt-right"></i></button>
             </form>
@@ -354,5 +356,84 @@
         </p>
       </section>
     </footer>
+    <script>
+      const footerFormElement = document.getElementById('footer-form-element');
+      const footerFormInputElement = document.getElementById('footer-email-input');
+      const quotesSectionElement = document.getElementById("quotes-section");
+      const quoteTextElement = document.getElementById('quote-text');
+      const nextQuoteBtn = document.getElementById('next-quote-btn');
+      const prevQuoteBtn = document.getElementById('prev-quote-btn');
+      const menuButton = document.getElementById('menu-button');
+      const menuList = document.getElementById('menu-list');
+
+      const quotesList = [
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias deleniti debitis autem repellendus eum voluptates saepe neque non facere vel consequatur nulla optio, blanditiis perferendis.',
+        'Alias deleniti debitis autem repellendus eum voluptates saepe nenon facere vel consequatur nulla optio, blanditiis perferendis.',
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit neque non facere vel consequatur nulla optio, blanditiis perferendis.'
+      ];
+      
+      let currentQuoteIndex = 0;
+
+      let isMenuVisible = false;
+
+    function showHideMenu() {
+        if(isMenuVisible) {
+          isMenuVisible = false;
+          document.body.classList.remove('no-scroll');
+          menuList.classList.remove('is-visible');
+        } else {
+          isMenuVisible = true;
+          document.body.classList.add('no-scroll');
+          menuList.classList.add('is-visible');
+        }
+      };
+
+      function showNextQuote() {
+        if(currentQuoteIndex < quotesList.length - 1)  {
+          currentQuoteIndex++; 
+        }   
+        quoteTextElement.textContent = quotesList[currentQuoteIndex];
+      };
+
+      function showPrevQuote() {
+        if(currentQuoteIndex > 0) {
+          currentQuoteIndex--; 
+        }       
+        quoteTextElement.textContent = quotesList[currentQuoteIndex];
+      };
+
+      function setInputErrorMsg(inputEl, msg) {
+        const spanElement = inputEl.parentNode.querySelector('span');
+        spanElement.textContent = msg;
+        spanElement.style.display ='inline-block';
+        inputEl.classList.add("is-invalid")
+      }
+
+      function removeInputErrorMsg(inputEl) {
+        const spanElement = inputEl.parentNode.querySelector('span');
+        spanElement.style.display = 'none';
+        inputEl.classList.remove('is-invalid');
+      }
+
+      footerFormElement.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        if(footerFormInputElement.value.length === 0) {
+            setInputErrorMsg(footerFormInputElement, 'Email is required');
+          }
+        });
+
+      footerFormInputElement.addEventListener('keydown', function(event) {
+        if(footerFormInputElement.classList.contains('is-invalid')) {
+          removeInputErrorMsg(footerFormInputElement);
+        }
+      });
+
+      nextQuoteBtn.addEventListener('click', showNextQuote);
+
+      prevQuoteBtn.addEventListener('click', showPrevQuote);
+
+      menuButton.addEventListener('click', showHideMenu);
+    </script>
   </body>
 </html>

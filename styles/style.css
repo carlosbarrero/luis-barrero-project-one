@@ -33,16 +33,6 @@ img, video {
   max-width: 100%;
 }
 
-a {
-    text-decoration: none !important;
-}
-
-a:hover {
-    color:white;
-    text-decoration:none;
-    cursor:pointer;
-}
-
 iframe {
   border: 0;
 }
@@ -357,6 +347,10 @@ html {
           flex-direction: column;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 .header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -414,6 +408,13 @@ html {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  z-index: 100;
+}
+
+.header__list.is-visible {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 @media screen and (max-width: 1280px) {
@@ -424,7 +425,22 @@ html {
 
 @media screen and (max-width: 768px) {
   .header__list {
+    position: fixed;
+    top: 0;
+    left: 0;
     display: none;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding: 22px;
+    min-height: 100vh;
+    min-width: 100vw;
+    background-color: #f6f6f6;
+    margin-top: 0;
   }
 }
 
@@ -441,6 +457,26 @@ html {
     font-size: 14px;
     margin-right: 16px;
   }
+}
+
+@media screen and (max-width: 768px) {
+  .header__list__item {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+}
+
+.header__list__item a {
+  color: #2e2e2e;
+  text-decoration: none;
+}
+
+.header__list__item.is-active {
+  color: #65a605;
+}
+
+.header__list__item.is-active a {
+  color: #65a605;
 }
 
 .header__list__item.is-active {
@@ -475,6 +511,7 @@ html {
           box-shadow: none;
   background-color: transparent;
   font-size: 24px;
+  z-index: 100;
 }
 
 @media screen and (max-width: 768px) {
@@ -577,6 +614,7 @@ html {
 .footer__content__list__form__form-wrapper label,
 .footer__content__list__form__form-wrapper input {
   width: 100%;
+  position: relative;
 }
 
 .footer__content__list__form__form-wrapper input {
@@ -588,6 +626,12 @@ html {
   font-size: 13px;
   border: none;
   outline: none;
+}
+
+.footer__content__list__form__form-wrapper input.is-invalid {
+  border: 2px solid #ff7171;
+  color: #ff7171;
+  border-right: none;
 }
 
 .footer__content__list__form__form-wrapper input::-webkit-input-placeholder {
@@ -613,6 +657,16 @@ html {
   border: none;
   outline: none;
   cursor: pointer;
+}
+
+.footer__content__list__form__form-wrapper .invalid-msg {
+  font-size: 10px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  color: #ff7171;
+  position: absolute;
+  left: 0;
+  bottom: -14px;
 }
 
 .footer__content__list__form .social-networks {
@@ -1744,18 +1798,35 @@ html {
   display: grid;
   -ms-grid-columns: 1fr 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px 20px;
+  gap: 20px 20px;
   width: 100%;
   border: none;
 }
 
 .blog-main-content .leave-comment__form__fieldset__label {
   width: 100%;
+  position: relative;
 }
 
 .blog-main-content .leave-comment__form__fieldset__label input {
   height: 40px;
   padding-left: 12px;
+}
+
+.blog-main-content .leave-comment__form__fieldset__label input.is-invalid {
+  border: 2px solid #ff7171;
+  color: #ff7171;
+}
+
+.blog-main-content .leave-comment__form__fieldset__label__invalid-msg {
+  font-size: 10px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  display: none;
+  color: #ff7171;
+  position: absolute;
+  left: 0;
+  bottom: -14px;
 }
 
 .blog-main-content .leave-comment__form__fieldset__label textarea {
@@ -1764,6 +1835,11 @@ html {
   resize: none;
   min-height: 140px;
   outline: none;
+}
+
+.blog-main-content .leave-comment__form__fieldset__label textarea.is-invalid {
+  border: 2px solid #ff7171;
+  color: #ff7171;
 }
 
 .blog-main-content .leave-comment__form__fieldset__label__input {
@@ -1889,6 +1965,11 @@ html {
   }
 }
 
+.contact-main__form fieldset {
+  border: none;
+  padding: 0;
+}
+
 .contact-main__form__fields {
   max-width: 650px;
   margin-left: auto;
@@ -1916,16 +1997,32 @@ html {
   margin-bottom: 0;
 }
 
-.contact-main__form__fields__control.is-group input {
+.contact-main__form__fields__control.is-group label {
   margin: 0 16px;
 }
 
-.contact-main__form__fields__control.is-group input:first-of-type {
+.contact-main__form__fields__control.is-group label:first-of-type {
   margin-left: 0;
 }
 
-.contact-main__form__fields__control.is-group input:last-of-type {
+.contact-main__form__fields__control.is-group label:last-of-type {
   margin-right: 0;
+}
+
+.contact-main__form__fields__control label {
+  width: 100%;
+  position: relative;
+}
+
+.contact-main__form__fields__control label .invalid-msg {
+  font-size: 10px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  display: none;
+  color: #ff7171;
+  position: absolute;
+  left: 0;
+  bottom: -14px;
 }
 
 .contact-main__form__fields__control input,
@@ -1938,6 +2035,13 @@ html {
   padding: 10px 14px;
   font-size: 14px;
   border: none;
+  outline: none;
+}
+
+.contact-main__form__fields__control input.is-invalid,
+.contact-main__form__fields__control textarea.is-invalid {
+  border: 2px solid #ff7171;
+  color: #ff7171;
 }
 
 .contact-main__form__fields__control input::-webkit-input-placeholder {
@@ -1970,10 +2074,18 @@ html {
   text-transform: uppercase;
   font-weight: 500;
   font-size: 16px;
+  outline: none;
 }
 
 .contact-main__form__fields .button .icon {
   margin-left: 7px;
+}
+
+.contact-main__form .success-message {
+  display: none;
+  font-size: 20px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
 }
 
 .contact-main__info {
@@ -2107,5 +2219,3 @@ html {
   background-size: cover;
   background-position: center;
 }
-
-

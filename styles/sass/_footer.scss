@@ -83,6 +83,7 @@
           label,
           input {
             width: 100%;
+            position: relative;
           }
 
           input {
@@ -94,6 +95,12 @@
             font-size: 13px;
             border: none;
             outline: none;
+
+            &.is-invalid {
+              border: 2px solid $danger;
+              color: $danger;
+              border-right: none;
+            }
           }
 
           input::placeholder {
@@ -107,6 +114,18 @@
             border: none;
             outline: none;
             cursor: pointer;
+          }
+
+
+          .invalid-msg {
+              font-size: 10px;
+              font-family: $font-raleway;
+              font-weight: 600;
+              // display: none;
+              color: $danger;
+              position: absolute;
+              left: 0;
+              bottom: -14px;
           }
         }
 

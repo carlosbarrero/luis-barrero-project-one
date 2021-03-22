@@ -32,13 +32,28 @@
     padding-left: 0;
     display: flex;
     align-items: center;
+    z-index: 100;
+
+    &.is-visible{
+      display: flex;
+    }
 
     @media screen and (max-width: 1280px) {
       margin-top: 32px;
     }
 
     @media screen and (max-width: 768px) {
-      display: none;
+     position: fixed;
+     top: 0;
+     left: 0;
+     display: none;
+     flex-direction: column;
+     justify-content: center;
+     padding: 22px;
+     min-height: 100vh;
+     min-width: 100vw;
+     background-color: $white;
+     margin-top: 0;
     }
 
     &__item {
@@ -52,6 +67,11 @@
         font-size: 14px;
         margin-right: 16px;
       }
+
+       @media screen and (max-width: 768px){
+         font-size: 24px;
+         margin-bottom: 24px;
+       }
       
       a {
       color: $black;
@@ -100,6 +120,7 @@
     box-shadow: none;
     background-color: transparent;
     font-size: 24px;
+    z-index: 100;
 
     @media screen and (max-width: 768px) {
       display: block;

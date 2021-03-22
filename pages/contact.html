@@ -20,7 +20,7 @@
           Delicious
         </span>
         <!--Header -->
-        <ul class="header__list">
+        <ul id="menu-list" class="header__list">
           <li class="header__list__item">
             <a href="../index.html">Home</a></li>
           </li>
@@ -53,7 +53,7 @@
           </li>
         </ul>
         <!--Hamburger Menu -->
-        <button class="burger-button">
+        <button id='menu-button' class="burger-button">
           <i class="fas fa-bars"></i>
         </button>
       </header>
@@ -65,23 +65,46 @@
           Drop us a line
         </h2>
         <!--Contact main information  -->
-        <div class="contact-main__form__fields">
-          <div class="contact-main__form__fields__control is-group">
-            <input type="text" placeholder="Your name" />
-            <input type="email" placeholder="Your email">
+        <form id="contact-form" class="contact-main__form__fields">
+          <fieldset id='contact-fieldset'>
+            <div class="contact-main__form__fields__control is-group">
+              <label for="name">
+                <input id="name-input" type="text" placeholder="Your name" />
+                <span class="invalid-msg">              
+                </span>
+              </label>
+              <label for="email">
+                <input id="email-input" type="email" placeholder="Your email">
+                <span class="invalid-msg">              
+                </span>
+              </label>
+            </div>
+            <div class="contact-main__form__fields__control">
+              <label for="subject">
+                <input id="subject-input" type="text" placeholder="Subject" />
+                <span class="invalid-msg">              
+                </span>
+              </label>
+            </div>
+            <div class="contact-main__form__fields__control">
+              
+              <label for="message">
+                <textarea id="message-input" name="message" placeholder="Message" cols="30" rows="80"></textarea>
+                <span class="invalid-msg">              
+                </span>
+              </label>
+            </div>
+
+            <!--Contact main information button  -->
+            <button class="button" type="submit">
+              Send message
+              <i class="fas fa-long-arrow-alt-right icon"></i>
+            </button>
+          </fieldset>
+
+          <div id="success-msg-element" class="success-message">
           </div>
-          <div class="contact-main__form__fields__control">
-            <input type="text" placeholder="Subject" />
-          </div>
-          <div class="contact-main__form__fields__control">
-            <textarea name="message" placeholder="Message" cols="30" rows="80"></textarea>
-          </div>
-          <!--Contact main information button  -->
-          <button class="button" type="button">
-            Send message
-            <i class="fas fa-long-arrow-alt-right icon"></i>
-          </button>
-        </div>
+        </form>
       </section>
       <section class="contact-main__info">
         <div class="contact-main__info__details">
@@ -212,14 +235,16 @@
               Get all of our newest recipes inmediately at your inbox
             </p>
             <!--Footer Section third form  -->
-            <form class="is-flex footer__content__list__form__form-wrapper">
+            <form id="footer-form-element" class="is-flex footer__content__list__form__form-wrapper">
               <label for="email">
                 <input
                   type="email"
                   name="email"
-                  id="email"
+                  id="footer-email-input"
                   placeholder="Enter your email"
                 />
+                <span class="invalid-msg">          
+                </span>
               </label>
               <button><i class="fas fa-long-arrow-alt-right"></i></button>
             </form>
@@ -265,5 +290,118 @@
         </p>
       </section>
     </footer>
+
+    <script>
+      // Contact form variables
+      const contactFormElement = document.getElementById("contact-form");
+      const emailInputElement = document.getElementById("email-input");
+      const fieldsetElement = document.getElementById('contact-fieldset');
+
+      // Footer form variables
+      const footerFormElement = document.getElementById('footer-form-element');
+      const footerFormInputElement = document.getElementById('footer-email-input');
+      const messageInputElement = document.getElementById("message-input");
+      const nameInputElement = document.getElementById("name-input");
+      const subjectInputElement = document.getElementById("subject-input");
+
+      // Success Messages
+      
+      const successMessageElement = document.getElementById('success-msg-element');
+      const menuButton = document.getElementById('menu-button');
+      const menuList = document.getElementById('menu-list');
+
+      let isMenuVisible = false;
+
+      function setInputErrorMsg(inputEl, msg) {
+        const spanElement = inputEl.parentNode.querySelector('span');
+        spanElement.textContent = msg;
+        spanElement.style.display ='inline-block';
+        inputEl.classList.add("is-invalid")
+    }
+
+    function showHideMenu() {
+        if(isMenuVisible) {
+          isMenuVisible = false;
+          document.body.classList.remove('no-scroll');
+          menuList.classList.remove('is-visible');
+        } else {
+          isMenuVisible = true;
+          document.body.classList.add('no-scroll');
+          menuList.classList.add('is-visible');
+        }
+      };
+
+      function removeInputErrorMsg(inputEl) {
+        const spanElement = inputEl.parentNode.querySelector('span');
+        spanElement.style.display = 'none';
+        inputEl.classList.remove('is-invalid');
+      }
+
+      contactFormElement.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        if (nameInputElement.value.length === 0) {
+         setInputErrorMsg(nameInputElement, 'Name is required');
+        }
+
+        if (emailInputElement.value.length === 0) {
+          setInputErrorMsg(emailInputElement, 'Email is required');
+        }
+
+        if (subjectInputElement.value.length === 0) {
+          setInputErrorMsg(subjectInputElement, 'Subject is required');
+        }
+
+        if (messageInputElement.value.length === 0) {
+          setInputErrorMsg(messageInputElement, 'Message is required');
+        }
+        
+        if(nameInputElement.value && emailInputElement.value && subjectInputElement.value && messageInputElement.value) {
+          fieldsetElement.style.display = 'none';
+          successMessageElement.textContent = `Thank you for submitting the form ${nameInputElement.value}!`
+          successMessageElement.style.display='inline-block';
+        }
+      });
+
+      footerFormElement.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        if(footerFormInputElement.value.length === 0) {
+          setInputErrorMsg(footerFormInputElement, 'Email is required');
+        }
+      })
+
+      nameInputElement.addEventListener('keydown', function(event) {
+        if(nameInputElement.classList.contains('is-invalid')) {
+          removeInputErrorMsg(nameInputElement);
+        }
+      });
+
+      footerFormInputElement.addEventListener('keydown', function(event) {
+        if(footerFormInputElement.classList.contains('is-invalid')) {
+          removeInputErrorMsg(footerFormInputElement);
+        }
+      });
+
+      emailInputElement.addEventListener('keydown', function(event) {
+        if(emailInputElement.classList.contains('is-invalid')) {
+          removeInputErrorMsg(emailInputElement);
+        }
+      });
+
+      subjectInputElement.addEventListener('keydown', function(event) {
+        if(subjectInputElement.classList.contains('is-invalid')) {
+          removeInputErrorMsg(subjectInputElement);
+        }
+      });
+
+      messageInputElement.addEventListener('keydown', function(event) {
+        if(messageInputElement.classList.contains('is-invalid')) {
+          removeInputErrorMsg(messageInputElement);
+        }
+      });
+
+      menuButton.addEventListener('click', showHideMenu);
+    </script>
   </body>
 </html>

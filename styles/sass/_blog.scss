@@ -318,16 +318,33 @@
       &__fieldset {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        gap: 10px 20px;
+        gap: 20px 20px;
         width: 100%;
         border: none;
 
         &__label {
           width: 100%;
+          position: relative;
 
           input {
             height: 40px;
             padding-left: 12px;
+
+            &.is-invalid {
+              border: 2px solid $danger;
+              color: $danger;
+            }
+          }
+
+          &__invalid-msg {
+            font-size: 10px;
+            font-family: $font-raleway;
+            font-weight: 600;
+            display: none;
+            color: $danger;
+            position: absolute;
+            left: 0;
+            bottom: -14px;
           }
 
           textarea {
@@ -336,6 +353,11 @@
             resize: none;
             min-height: 140px;
             outline: none;
+
+            &.is-invalid {
+              border: 2px solid $danger;
+              color: $danger;
+            }
           }
 
           &__input {

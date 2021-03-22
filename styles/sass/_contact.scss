@@ -43,6 +43,11 @@
         text-align: center;
       }
     }
+    
+    fieldset {
+      border: none;
+      padding: 0;
+    }
 
     &__fields {
       max-width: 650px;
@@ -64,7 +69,7 @@
         }
 
         &.is-group {
-          input {
+          label {
             margin: 0 16px;
 
             &:first-of-type {
@@ -74,6 +79,22 @@
             &:last-of-type {
               margin-right: 0;
             }
+          }
+        }
+
+        label {
+          width: 100%;
+          position: relative;
+
+          .invalid-msg {
+            font-size: 10px;
+            font-family: $font-raleway;
+            font-weight: 600;
+            display: none;
+            color: $danger;
+            position: absolute;
+            left: 0;
+            bottom: -14px;
           }
         }
 
@@ -87,6 +108,12 @@
           padding: 10px 14px;
           font-size: 14px;
           border: none;
+          outline: none;
+
+          &.is-invalid {
+            border: 2px solid $danger;
+            color: $danger;
+          }
         }
 
         input::placeholder {
@@ -108,11 +135,19 @@
         text-transform: uppercase;
         font-weight: 500;
         font-size: 16px;
+        outline: none;
 
         .icon {
           margin-left: 7px;
         }
       }
+    }
+
+    .success-message {
+      display: none;
+      font-size: 20px;
+      font-family: $font-raleway;
+      font-weight: 500;
     }
   }
 
